@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -24,7 +23,7 @@ public class ClientServices {
         return webClient.post().uri("/upload").contentType(MediaType.MULTIPART_FORM_DATA).body(BodyInserters.fromMultipartData(body.build())).retrieve().bodyToMono(Void.class);
     }
 
-    Flux<String> showAllFiles() {
-        return webClient.get().uri("/files").accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(String.class);
+    Mono<AllFiles> showAllFiles() {
+        return webClient.get().uri("/files").accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(AllFiles.class);
     }
 }

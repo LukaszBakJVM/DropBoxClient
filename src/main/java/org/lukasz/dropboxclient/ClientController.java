@@ -3,7 +3,6 @@ package org.lukasz.dropboxclient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -22,7 +21,7 @@ public class ClientController {
 
     @GetMapping("/files")
     @ResponseStatus(HttpStatus.OK)
-    Flux<String> allFiles() {
+    Mono<AllFiles> allFiles() {
         return services.showAllFiles();
     }
 }
